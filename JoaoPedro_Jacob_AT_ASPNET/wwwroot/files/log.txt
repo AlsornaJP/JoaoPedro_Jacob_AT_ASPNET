@@ -1,0 +1,6 @@
+[ARQUIVO] 2026-06-17 02:50:10 - Reserva criada: cliente 'Comprador Grupo', pacote 'Nova York Especial', 5 lugar(es).
+[ARQUIVO] 2026-06-17 03:06:31 - Reserva criada: cliente 'joao pedro', pacote 'Europa Clássica', 5 lugar(es).
+[ARQUIVO] 2026-06-17 03:08:49 - Reserva criada: cliente 'joao pedro', pacote 'Nova York Especial', 1 lugar(es).
+[ARQUIVO] 2026-06-17 03:10:28 - Reserva criada: cliente 'joao pedro', pacote 'Europa Clássica', 1 lugar(es).
+[ARQUIVO] 2026-06-17 04:02:57 - Reserva criada: cliente 'joao pedro', pacote 'Europa Clássica', 18 lugar(es).
+[ARQUIVO] 2026-06-17 04:03:19 - Reserva criada: cliente 'joao pedro', pacote 'Nova York Especial', 5 lugar(es).
