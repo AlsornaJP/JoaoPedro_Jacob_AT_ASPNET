@@ -1,0 +1,82 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Agência de Turismo";
+}
+
+<div class="py-5 mb-5 rounded-3 text-center"
+     style="background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%); color: #f0f8ff;">
+    <div class="container py-3">
+        <h1 class="display-4 fw-bold" style="color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.18);">✈ FlyAir</h1>
+        <p class="lead mb-4" style="color: #dff0ff;">Descubra o mundo com conforto, segurança e os melhores preços. Escolha seu destino e comece a planejar sua próxima aventura.</p>
+        <a asp-page="/PacotesTuristicos/Index" class="btn btn-light btn-lg fw-bold me-2">Ver Pacotes</a>
+        <a asp-page="/Destinos/Index" class="btn btn-outline-light btn-lg">Explorar Destinos</a>
+    </div>
+</div>
+
+<div class="row text-center g-4 mb-5">
+    <div class="col-md-4">
+        <div class="p-4">
+            <div style="font-size:3rem;">🌍</div>
+            <h5 class="fw-bold mt-2">Destinos Incríveis</h5>
+            <p class="text-muted">De Paris a Tóquio, passando pelo Egito e Caribe — temos roteiros para todos os gostos e perfis de viajante.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-4">
+            <div style="font-size:3rem;">🏨</div>
+            <h5 class="fw-bold mt-2">Hospedagem Incluída</h5>
+            <p class="text-muted">Todos os nossos pacotes incluem hospedagem selecionada, transfers e acompanhamento de guias especializados.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-4">
+            <div style="font-size:3rem;">🔒</div>
+            <h5 class="fw-bold mt-2">Reserva Segura</h5>
+            <p class="text-muted">Processo de reserva simples e seguro. Você escolhe o pacote, preenche seus dados e pronto — sua vaga está garantida.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="mb-5" />
+
+<div class="text-center mb-4">
+    <h2 class="fw-bold">Pacotes em Destaque</h2>
+    <p class="text-muted">Confira algumas das nossas melhores opções de viagem</p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+    @foreach (var info in Model.PacotesDestaque)
+    {
+        var p = info.Pacote;
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height:140px; font-size:3.5rem;">
+                    ✈️
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">@p.Titulo</h5>
+                    <p class="card-text text-muted small">@string.Join(", ", p.Destinos.Select(d => d.Nome))</p>
+                    <p class="fw-bold text-success mb-1">@p.Preco.ToString("C")</p>
+                    <small class="text-muted">Saída: @p.DataInicio.ToString("dd/MM/yyyy") &mdash;
+                        <span class="badge bg-success">@info.VagasDisponiveis vaga(s)</span>
+                    </small>
+                </div>
+                <div class="card-footer bg-transparent">
+                    @if (info.Disponivel)
+                    {
+                        <a asp-page="/Reservas/Create" asp-route-pacoteId="@p.Id" class="btn btn-primary w-100 btn-sm">Comprar</a>
+                    }
+                    else
+                    {
+                        <button class="btn btn-secondary w-100 btn-sm" disabled>Indisponível</button>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="text-center mb-4">
+    <a asp-page="/PacotesTuristicos/Index" class="btn btn-outline-primary">Ver todos os pacotes</a>
+</div>

@@ -1,0 +1,71 @@
+@page
+@model JoaoPedro_Jacob_AT_ASPNET.Pages.Notas.ViewNotesModel
+
+@{
+    ViewData["Title"] = "Anotações";
+}
+
+<h2>Anotações</h2>
+<hr />
+
+<div class="row g-4">
+    <div class="col-md-5">
+        <h5>Nova anotação</h5>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+            <div class="form-group mb-3">
+                <label asp-for="Titulo" class="form-label"></label>
+                <input asp-for="Titulo" class="form-control" placeholder="Ex: Lembrete" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Conteudo" class="form-label"></label>
+                <textarea asp-for="Conteudo" class="form-control" rows="5" placeholder="Escreva sua anotação..."></textarea>
+                <span asp-validation-for="Conteudo" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar anotação</button>
+        </form>
+    </div>
+
+    <div class="col-md-3">
+        <h5>Arquivos salvos</h5>
+        @if (!Model.Arquivos.Any())
+        {
+            <p class="text-muted small">Nenhuma anotação ainda.</p>
+        }
+        else
+        {
+            <ul class="list-group">
+                @foreach (var arquivo in Model.Arquivos)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center @(arquivo == Model.ArquivoSelecionado ? "active" : "")">
+                        <a asp-page="ViewNotes" asp-route-arquivo="@arquivo"
+                           class="text-truncate @(arquivo == Model.ArquivoSelecionado ? "text-white" : "")"
+                           style="max-width: 180px;">@arquivo</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+
+    <div class="col-md-4">
+        <h5>Conteúdo</h5>
+        @if (Model.ConteudoSelecionado != null)
+        {
+            <div class="card">
+                <div class="card-header fw-bold text-truncate">@Model.ArquivoSelecionado</div>
+                <div class="card-body">
+                    <pre class="mb-0" style="white-space: pre-wrap; word-wrap: break-word;">@Model.ConteudoSelecionado</pre>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p class="text-muted small">Selecione um arquivo para ver seu conteúdo.</p>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

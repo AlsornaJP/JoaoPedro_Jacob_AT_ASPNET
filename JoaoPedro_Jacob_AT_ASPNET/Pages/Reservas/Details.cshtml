@@ -1,0 +1,54 @@
+@page "{id:int}"
+@model JoaoPedro_Jacob_AT_ASPNET.Pages.Reservas.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalhes da Reserva";
+}
+
+<h1>Detalhes da Reserva</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header fw-bold bg-primary text-white">Dados do Cliente</div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Nome</dt>
+                    <dd class="col-sm-8">@Model.Reserva.Cliente?.Nome</dd>
+
+                    <dt class="col-sm-4">E-mail</dt>
+                    <dd class="col-sm-8">@Model.Reserva.Cliente?.Email</dd>
+
+                    <dt class="col-sm-4">Telefone</dt>
+                    <dd class="col-sm-8">@Model.Reserva.Cliente?.Telefone</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header fw-bold bg-secondary text-white">Pacote Turístico</div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Pacote</dt>
+                    <dd class="col-sm-8">@Model.Reserva.PacoteTuristico?.Titulo</dd>
+
+                    <dt class="col-sm-4">Saída</dt>
+                    <dd class="col-sm-8">@Model.Reserva.PacoteTuristico?.DataInicio.ToString("dd/MM/yyyy")</dd>
+
+                    <dt class="col-sm-4">Preço</dt>
+                    <dd class="col-sm-8 text-success fw-bold">@Model.Reserva.PacoteTuristico?.Preco.ToString("C")</dd>
+
+                    <dt class="col-sm-4">Data da Reserva</dt>
+                    <dd class="col-sm-8">@Model.Reserva.DataReserva.ToString("dd/MM/yyyy")</dd>
+
+                    <dt class="col-sm-4">Lugares</dt>
+                    <dd class="col-sm-8">@Model.Reserva.Quantidade</dd>
+                </dl>
+            </div>
+        </div>
+
+        <a asp-page="./Index" class="btn btn-outline-secondary">Voltar à lista</a>
+        <a asp-page="./Delete" asp-route-id="@Model.Reserva.Id" class="btn btn-outline-danger ms-2">Cancelar Reserva</a>
+    </div>
+</div>

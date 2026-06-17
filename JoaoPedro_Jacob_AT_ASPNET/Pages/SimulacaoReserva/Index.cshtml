@@ -1,0 +1,56 @@
+@page
+@model JoaoPedro_Jacob_AT_ASPNET.Pages.SimulacaoReserva.IndexModel
+
+@{
+    ViewData["Title"] = "Simulação de Reserva";
+}
+
+<h2>Simulação de Reserva</h2>
+<p class="text-muted">Informe o pacote e a quantidade de participantes para calcular o valor total.</p>
+<hr />
+
+<div class="row">
+    <div class="col-md-5">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="PacoteId" class="form-label fw-bold">Pacote Turístico</label>
+                <select asp-for="PacoteId" class="form-select" asp-items="Model.PacotesSelectList">
+                    <option value="">-- Selecione um pacote --</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Quantidade" class="form-label fw-bold">Número de Participantes</label>
+                <input asp-for="Quantidade" class="form-control" type="number" min="1" max="500" placeholder="Ex: 2" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Calcular Total</button>
+        </form>
+    </div>
+
+    @if (Model.Total.HasValue && Model.PacoteSelecionado != null)
+    {
+        <div class="col-md-5 d-flex align-items-center">
+            <div class="card border-success w-100">
+                <div class="card-header bg-success text-white fw-bold">Resultado da Simulação</div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Pacote</dt>
+                        <dd class="col-sm-6">@Model.PacoteSelecionado.Titulo</dd>
+
+                        <dt class="col-sm-6">Preço por pessoa</dt>
+                        <dd class="col-sm-6">@Model.PacoteSelecionado.Preco.ToString("C")</dd>
+
+                        <dt class="col-sm-6">Participantes</dt>
+                        <dd class="col-sm-6">@Model.Quantidade</dd>
+
+                        <dt class="col-sm-6 fs-5">Total</dt>
+                        <dd class="col-sm-6 fs-5 fw-bold text-success">@Model.Total.Value.ToString("C")</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    }
+</div>

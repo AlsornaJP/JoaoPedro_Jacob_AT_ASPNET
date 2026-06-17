@@ -1,0 +1,39 @@
+@page "{id:int}"
+@model JoaoPedro_Jacob_AT_ASPNET.Pages.Destinos.DetailsModel
+
+@{
+    ViewData["Title"] = Model.Destino.Nome;
+}
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="bg-light rounded-3 d-flex align-items-center justify-content-center overflow-hidden" style="height:380px;">
+            @if (!string.IsNullOrEmpty(Model.Destino.ImagemUrl))
+            {
+                <img src="@Model.Destino.ImagemUrl" alt="@Model.Destino.Nome"
+                     class="img-fluid w-100 h-100 object-fit-cover" />
+            }
+            else
+            {
+                <div class="text-center text-muted">
+                    <div style="font-size:5rem;">🌍</div>
+                    <p class="mt-2 small">Foto em breve</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-6 d-flex flex-column justify-content-center">
+        <h1 class="fw-bold">@Model.Destino.Nome</h1>
+        <span class="badge bg-secondary fs-6 mb-3 w-auto align-self-start">@Model.Destino.Pais</span>
+
+        @if (!string.IsNullOrEmpty(Model.Destino.Descricao))
+        {
+            <p class="lead text-muted">@Model.Destino.Descricao</p>
+        }
+
+        <div class="mt-auto pt-4">
+            <a asp-page="./Index" class="btn btn-outline-primary btn-sm">Voltar à lista</a>
+        </div>
+    </div>
+</div>

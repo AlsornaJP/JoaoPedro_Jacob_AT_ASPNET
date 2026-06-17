@@ -1,0 +1,27 @@
+@page "{id:int}"
+@model JoaoPedro_Jacob_AT_ASPNET.Pages.Destinos.DeleteModel
+
+@{
+    ViewData["Title"] = "Excluir Destino";
+}
+
+<h1>Excluir Destino</h1>
+<hr />
+
+<div class="alert alert-warning">
+    Tem certeza que deseja excluir este destino?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Destino.Nome)</dt>
+    <dd class="col-sm-10">@Html.DisplayFor(model => model.Destino.Nome)</dd>
+
+    <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Destino.Pais)</dt>
+    <dd class="col-sm-10">@Html.DisplayFor(model => model.Destino.Pais)</dd>
+</dl>
+
+<form method="post">
+    <input type="hidden" asp-for="Destino.Id" />
+    <input type="submit" value="Excluir" class="btn btn-danger" />
+    <a asp-page="./Index" class="btn btn-secondary">Cancelar</a>
+</form>

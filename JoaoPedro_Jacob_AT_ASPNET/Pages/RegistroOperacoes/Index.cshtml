@@ -1,0 +1,54 @@
+@page
+@model JoaoPedro_Jacob_AT_ASPNET.Pages.RegistroOperacoes.IndexModel
+
+@{
+    ViewData["Title"] = "Registro de Operações";
+}
+
+<h1>Registro de Operações</h1>
+<p class="text-muted">
+    As operações do sistema (ex.: criação de reserva) são registradas via um delegate
+    multicast em três destinos: console, arquivo (<code>wwwroot/files/log.txt</code>) e memória.
+</p>
+<hr />
+
+<div class="row">
+    <div class="col-md-5">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="Mensagem" class="control-label">Registrar operação manual (teste)</label>
+                <input asp-for="Mensagem" class="form-control" placeholder="Ex: Operação de teste" />
+                <span asp-validation-for="Mensagem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Registrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h4>Operações registradas (memória)</h4>
+    @if (Model.LogsMemoria.Count == 0)
+    {
+        <div class="alert alert-info">Nenhuma operação registrada ainda. Crie uma reserva para ver o registro automático.</div>
+    }
+    else
+    {
+        <ul class="list-group">
+            @foreach (var log in Model.LogsMemoria)
+            {
+                <li class="list-group-item list-group-item-info">@log</li>
+            }
+        </ul>
+    }
+</div>
+
+<div class="mt-3">
+    <a asp-page="/Index">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

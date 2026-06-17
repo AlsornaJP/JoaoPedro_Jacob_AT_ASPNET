@@ -1,0 +1,56 @@
+@page "{id:int}"
+@model JoaoPedro_Jacob_AT_ASPNET.Pages.Clientes.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalhes do Cliente";
+}
+
+<h1>Detalhes do Cliente</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header fw-bold bg-primary text-white">Dados do Cliente</div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cliente.Nome)</dt>
+                    <dd class="col-sm-8">@Model.Cliente.Nome</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cliente.Email)</dt>
+                    <dd class="col-sm-8">@Model.Cliente.Email</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cliente.Telefone)</dt>
+                    <dd class="col-sm-8">@Model.Cliente.Telefone</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header fw-bold bg-secondary text-white">
+                Reservas (@Model.Cliente.Reservas.Count)
+            </div>
+            <div class="card-body">
+                @if (!Model.Cliente.Reservas.Any())
+                {
+                    <p class="text-muted mb-0">Este cliente ainda não possui reservas.</p>
+                }
+                else
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var reserva in Model.Cliente.Reservas)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <span>@reserva.PacoteTuristico?.Titulo</span>
+                                <span class="text-muted small">@reserva.DataReserva.ToString("dd/MM/yyyy")</span>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+
+        <a asp-page="./Edit" asp-route-id="@Model.Cliente.Id" class="btn btn-outline-secondary">Editar</a>
+        <a asp-page="./Index" class="btn btn-outline-primary">Voltar à lista</a>
+    </div>
+</div>

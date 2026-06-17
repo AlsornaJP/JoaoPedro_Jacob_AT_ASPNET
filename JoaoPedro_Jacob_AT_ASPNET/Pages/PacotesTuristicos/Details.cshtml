@@ -1,0 +1,45 @@
+@page "{id:int}"
+@model JoaoPedro_Jacob_AT_ASPNET.Pages.PacotesTuristicos.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalhes do Pacote";
+}
+
+<h1>Detalhes do Pacote Turístico</h1>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PacoteTuristico.Titulo)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.PacoteTuristico.Titulo)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PacoteTuristico.DataInicio)</dt>
+    <dd class="col-sm-9">@Model.PacoteTuristico.DataInicio.ToString("dd/MM/yyyy")</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PacoteTuristico.CapacidadeMaxima)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.PacoteTuristico.CapacidadeMaxima)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PacoteTuristico.Preco)</dt>
+    <dd class="col-sm-9">@Model.PacoteTuristico.Preco.ToString("C")</dd>
+
+    <dt class="col-sm-3">Destinos</dt>
+    <dd class="col-sm-9">
+        @if (Model.PacoteTuristico.Destinos.Any())
+        {
+            <ul class="list-unstyled mb-0">
+                @foreach (var d in Model.PacoteTuristico.Destinos)
+                {
+                    <li>@d.Nome — @d.Pais</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <span class="text-muted">Nenhum destino cadastrado</span>
+        }
+    </dd>
+</dl>
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.PacoteTuristico.Id" class="btn btn-secondary btn-sm">Editar</a> |
+    <a asp-page="./Index" class="btn btn-link btn-sm">Voltar à lista</a>
+</div>
